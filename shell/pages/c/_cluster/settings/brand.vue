@@ -1,42 +1,86 @@
 <script>
-import { LabeledInput } from '@components/Form/LabeledInput';
-import ColorInput from '@shell/components/form/ColorInput';
-import TypeDescription from '@shell/components/TypeDescription';
+import { LabeledInput } from "@components/Form/LabeledInput";
+import ColorInput from "@shell/components/form/ColorInput";
+import TypeDescription from "@shell/components/TypeDescription";
 
-import { Checkbox } from '@components/Form/Checkbox';
-import FileImageSelector from '@shell/components/form/FileImageSelector';
-import SimpleBox from '@shell/components/SimpleBox';
-import Loading from '@shell/components/Loading';
-import AsyncButton from '@shell/components/AsyncButton';
-import { Banner } from '@components/Banner';
-import { allHash } from '@shell/utils/promise';
-import { MANAGEMENT } from '@shell/config/types';
-import { getVendor, setVendor } from '@shell/config/private-label';
-import { fetchOrCreateSetting } from '@shell/utils/settings';
-import { SETTING } from '@shell/config/settings';
-import { _EDIT, _VIEW } from '@shell/config/query-params';
-import { setFavIcon } from '@shell/utils/favicon';
-import TabTitle from '@shell/components/TabTitle';
+import { Checkbox } from "@components/Form/Checkbox";
+import FileImageSelector from "@shell/components/form/FileImageSelector";
+import SimpleBox from "@shell/components/SimpleBox";
+import Loading from "@shell/components/Loading";
+import AsyncButton from "@shell/components/AsyncButton";
+import { Banner } from "@components/Banner";
+import { allHash } from "@shell/utils/promise";
+import { MANAGEMENT } from "@shell/config/types";
+import { getVendor, setVendor } from "@shell/config/private-label";
+import { fetchOrCreateSetting } from "@shell/utils/settings";
+import { SETTING } from "@shell/config/settings";
+import { _EDIT, _VIEW } from "@shell/config/query-params";
+import { setFavIcon } from "@shell/utils/favicon";
+import TabTitle from "@shell/components/TabTitle";
 
-const Color = require('color');
+const Color = require("color");
 
 export default {
   components: {
-    LabeledInput, Checkbox, FileImageSelector, Loading, SimpleBox, AsyncButton, Banner, ColorInput, TypeDescription, TabTitle
+    LabeledInput,
+    Checkbox,
+    FileImageSelector,
+    Loading,
+    SimpleBox,
+    AsyncButton,
+    Banner,
+    ColorInput,
+    TypeDescription,
+    TabTitle,
   },
 
   async fetch() {
     const hash = await allHash({
-      uiPLSetting:                   this.$store.dispatch('management/find', { type: MANAGEMENT.SETTING, id: SETTING.PL }),
-      uiLogoDarkSetting:             fetchOrCreateSetting(this.$store, SETTING.LOGO_DARK, ''),
-      uiLogoLightSetting:            fetchOrCreateSetting(this.$store, SETTING.LOGO_LIGHT, ''),
-      uiBannerDarkSetting:           fetchOrCreateSetting(this.$store, SETTING.BANNER_DARK, ''),
-      uiBannerLightSetting:          fetchOrCreateSetting(this.$store, SETTING.BANNER_LIGHT, ''),
-      uiLoginBackgroundDarkSetting:  fetchOrCreateSetting(this.$store, SETTING.LOGIN_BACKGROUND_DARK, ''),
-      uiLoginBackgroundLightSetting: fetchOrCreateSetting(this.$store, SETTING.LOGIN_BACKGROUND_LIGHT, ''),
-      uiColorSetting:                fetchOrCreateSetting(this.$store, SETTING.PRIMARY_COLOR, ''),
-      uiLinkColorSetting:            fetchOrCreateSetting(this.$store, SETTING.LINK_COLOR, ''),
-      uiFaviconSetting:              fetchOrCreateSetting(this.$store, SETTING.FAVICON, ''),
+      uiPLSetting: this.$store.dispatch("management/find", {
+        type: MANAGEMENT.SETTING,
+        id: SETTING.PL,
+      }),
+      uiLogoDarkSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.LOGO_DARK,
+        ""
+      ),
+      uiLogoLightSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.LOGO_LIGHT,
+        ""
+      ),
+      uiBannerDarkSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.BANNER_DARK,
+        ""
+      ),
+      uiBannerLightSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.BANNER_LIGHT,
+        ""
+      ),
+      uiLoginBackgroundDarkSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.LOGIN_BACKGROUND_DARK,
+        ""
+      ),
+      uiLoginBackgroundLightSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.LOGIN_BACKGROUND_LIGHT,
+        ""
+      ),
+      uiColorSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.PRIMARY_COLOR,
+        ""
+      ),
+      uiLinkColorSetting: fetchOrCreateSetting(
+        this.$store,
+        SETTING.LINK_COLOR,
+        ""
+      ),
+      uiFaviconSetting: fetchOrCreateSetting(this.$store, SETTING.FAVICON, ""),
     });
 
     Object.assign(this, hash);
@@ -99,59 +143,62 @@ export default {
 
   data() {
     return {
-      vendor:      getVendor(),
+      vendor: getVendor(),
       uiPLSetting: {},
 
-      uiLogoDarkSetting:  {},
-      uiLogoDark:         '',
+      uiLogoDarkSetting: {},
+      uiLogoDark: "",
       uiLogoLightSetting: {},
-      uiLogoLight:        '',
-      customizeLogo:      false,
+      uiLogoLight: "",
+      customizeLogo: false,
 
-      uiBannerDarkSetting:  {},
-      uiBannerDark:         '',
+      uiBannerDarkSetting: {},
+      uiBannerDark: "",
       uiBannerLightSetting: {},
-      uiBannerLight:        '',
-      customizeBanner:      false,
+      uiBannerLight: "",
+      customizeBanner: false,
 
-      uiLoginBackgroundDarkSetting:  {},
-      uiLoginBackgroundDark:         '',
+      uiLoginBackgroundDarkSetting: {},
+      uiLoginBackgroundDark: "",
       uiLoginBackgroundLightSetting: {},
-      uiLoginBackgroundLight:        '',
-      customizeLoginBackground:      false,
+      uiLoginBackgroundLight: "",
+      customizeLoginBackground: false,
 
       uiFaviconSetting: {},
-      uiFavicon:        '',
+      uiFavicon: "",
       customizeFavicon: false,
 
-      uiColorSetting:     {},
-      uiColor:            null,
-      customizeColor:     false,
+      uiColorSetting: {},
+      uiColor: null,
+      customizeColor: false,
       uiLinkColorSetting: {},
-      uiLinkColor:        null,
+      uiLinkColor: null,
       customizeLinkColor: false,
 
       errors: [],
-
     };
   },
 
   computed: {
     mode() {
-      const schema = this.$store.getters[`management/schemaFor`](MANAGEMENT.SETTING);
+      const schema = this.$store.getters[`management/schemaFor`](
+        MANAGEMENT.SETTING
+      );
 
-      return schema?.resourceMethods?.includes('PUT') ? _EDIT : _VIEW;
-    }
+      return schema?.resourceMethods?.includes("PUT") ? _EDIT : _VIEW;
+    },
   },
 
   mounted() {
-    let uiColor = getComputedStyle(document.body).getPropertyValue('--primary');
-    let uiLinkColor = getComputedStyle(document.body).getPropertyValue('--link');
-    const suse = document.querySelector('.suse');
+    let uiColor = getComputedStyle(document.body).getPropertyValue("--primary");
+    let uiLinkColor = getComputedStyle(document.body).getPropertyValue(
+      "--link"
+    );
+    const suse = document.querySelector(".suse");
 
     if (suse) {
-      uiColor = getComputedStyle(suse).getPropertyValue('--primary');
-      uiLinkColor = getComputedStyle(suse).getPropertyValue('--link');
+      uiColor = getComputedStyle(suse).getPropertyValue("--primary");
+      uiLinkColor = getComputedStyle(suse).getPropertyValue("--link");
     }
 
     // Only set the color to the default if not already set from the custom color
@@ -170,36 +217,39 @@ export default {
     },
 
     async save(btnCB) {
-      this.uiPLSetting.value = this.uiPLSetting.value.replaceAll(/[\<>&=#()"]/gm, '');
+      this.uiPLSetting.value = this.uiPLSetting.value.replaceAll(
+        /[\<>&=#()"]/gm,
+        ""
+      );
 
       if (this.customizeLogo) {
         this.uiLogoLightSetting.value = this.uiLogoLight;
         this.uiLogoDarkSetting.value = this.uiLogoDark;
       } else {
-        this.uiLogoLightSetting.value = '';
-        this.uiLogoDarkSetting.value = '';
+        this.uiLogoLightSetting.value = "";
+        this.uiLogoDarkSetting.value = "";
       }
 
       if (this.customizeBanner) {
         this.uiBannerLightSetting.value = this.uiBannerLight;
         this.uiBannerDarkSetting.value = this.uiBannerDark;
       } else {
-        this.uiBannerLightSetting.value = '';
-        this.uiBannerDarkSetting.value = '';
+        this.uiBannerLightSetting.value = "";
+        this.uiBannerDarkSetting.value = "";
       }
 
       if (this.customizeLoginBackground) {
         this.uiLoginBackgroundLightSetting.value = this.uiLoginBackgroundLight;
         this.uiLoginBackgroundDarkSetting.value = this.uiLoginBackgroundDark;
       } else {
-        this.uiLoginBackgroundLightSetting.value = '';
-        this.uiLoginBackgroundDarkSetting.value = '';
+        this.uiLoginBackgroundLightSetting.value = "";
+        this.uiLoginBackgroundDarkSetting.value = "";
       }
 
       if (this.customizeFavicon) {
         this.uiFaviconSetting.value = this.uiFavicon;
       } else {
-        this.uiFaviconSetting.value = '';
+        this.uiFaviconSetting.value = "";
       }
 
       if (this.customizeColor) {
@@ -227,7 +277,7 @@ export default {
           this.uiLoginBackgroundLightSetting.save(),
           this.uiColorSetting.save(),
           this.uiLinkColorSetting.save(),
-          this.uiFaviconSetting.save()
+          this.uiFaviconSetting.save(),
         ]);
         if (this.uiPLSetting.value !== this.vendor) {
           setVendor(this.uiPLSetting.value);
@@ -240,7 +290,7 @@ export default {
         btnCB(false);
       }
     },
-  }
+  },
 };
 </script>
 
@@ -248,7 +298,7 @@ export default {
   <Loading v-if="$fetchState.pending" />
   <div v-else>
     <h1 class="mb-20">
-      <TabTitle>{{ t('branding.label') }}</TabTitle>
+      <TabTitle>{{ t("branding.label") }}</TabTitle>
     </h1>
     <TypeDescription resource="branding" />
     <div>
@@ -263,10 +313,10 @@ export default {
         </div>
       </div>
       <h3 class="mt-20 mb-5 pb-5">
-        {{ t('branding.logos.label') }}
+        {{ t("branding.logos.label") }}
       </h3>
       <label class="text-label">
-        {{ t('branding.logos.tip', {}, true) }}
+        {{ t("branding.logos.tip", {}, true) }}
       </label>
 
       <div class="row mt-10 mb-20">
@@ -277,10 +327,7 @@ export default {
         />
       </div>
 
-      <div
-        v-if="customizeLogo"
-        class="row mb-20"
-      >
+      <div v-if="customizeLogo" class="row mb-20">
         <div class="col preview-container logo span-6">
           <div class="mb-10">
             <FileImageSelector
@@ -294,16 +341,15 @@ export default {
               @input="updateBranding($event, 'uiLogoLight')"
             />
           </div>
-          <SimpleBox
-            v-if="uiLogoLight || uiLogoDark"
-            class="theme-light  mb-10"
-          >
-            <label class="text-muted">{{ t('branding.logos.lightPreview') }}</label>
+          <SimpleBox v-if="uiLogoLight || uiLogoDark" class="theme-light mb-10">
+            <label class="text-muted">{{
+              t("branding.logos.lightPreview")
+            }}</label>
             <img
               class="img-preview"
               data-testid="branding-logo-light-preview"
               :src="uiLogoLight ? uiLogoLight : uiLogoDark"
-            >
+            />
           </SimpleBox>
         </div>
         <div class="col preview-container logo span-6">
@@ -319,25 +365,24 @@ export default {
               @input="updateBranding($event, 'uiLogoDark')"
             />
           </div>
-          <SimpleBox
-            v-if="uiLogoDark || uiLogoLight"
-            class="theme-dark  mb-10"
-          >
-            <label class="text-muted">{{ t('branding.logos.darkPreview') }}</label>
+          <SimpleBox v-if="uiLogoDark || uiLogoLight" class="theme-dark mb-10">
+            <label class="text-muted">{{
+              t("branding.logos.darkPreview")
+            }}</label>
             <img
               class="img-preview"
               data-testid="branding-logo-dark-preview"
               :src="uiLogoDark ? uiLogoDark : uiLogoLight"
-            >
+            />
           </SimpleBox>
         </div>
       </div>
 
       <h3 class="mt-20 mb-5 pb-5">
-        {{ t('branding.banner.label') }}
+        {{ t("branding.banner.label") }}
       </h3>
       <label class="text-label">
-        {{ t('branding.banner.tip', {}, true) }}
+        {{ t("branding.banner.tip", {}, true) }}
       </label>
 
       <div class="row mt-10 mb-20">
@@ -348,10 +393,7 @@ export default {
         />
       </div>
 
-      <div
-        v-if="customizeBanner"
-        class="row mb-20"
-      >
+      <div v-if="customizeBanner" class="row mb-20">
         <div class="col preview-container banner span-6">
           <div class="mb-10">
             <FileImageSelector
@@ -369,12 +411,14 @@ export default {
             v-if="uiBannerLight || uiBannerDark"
             class="theme-light mb-10"
           >
-            <label class="text-muted">{{ t('branding.banner.lightPreview') }}</label>
+            <label class="text-muted">{{
+              t("branding.banner.lightPreview")
+            }}</label>
             <img
               class="img-preview"
               data-testid="branding-banner-light-preview"
               :src="uiBannerLight ? uiBannerLight : uiBannerDark"
-            >
+            />
           </SimpleBox>
         </div>
         <div class="col preview-container banner span-6">
@@ -392,23 +436,25 @@ export default {
           </div>
           <SimpleBox
             v-if="uiBannerDark || uiBannerLight"
-            class="theme-dark  mb-10"
+            class="theme-dark mb-10"
           >
-            <label class="text-muted">{{ t('branding.banner.darkPreview') }}</label>
+            <label class="text-muted">{{
+              t("branding.banner.darkPreview")
+            }}</label>
             <img
               class="img-preview"
               data-testid="branding-banner-dark-preview"
               :src="uiBannerDark ? uiBannerDark : uiBannerLight"
-            >
+            />
           </SimpleBox>
         </div>
       </div>
 
       <h3 class="mt-20 mb-5 pb-5">
-        {{ t('branding.loginBackground.label') }}
+        {{ t("branding.loginBackground.label") }}
       </h3>
       <label class="text-label">
-        {{ t('branding.loginBackground.tip', {}, true) }}
+        {{ t("branding.loginBackground.tip", {}, true) }}
       </label>
 
       <div class="row mt-10 mb-20">
@@ -419,10 +465,7 @@ export default {
         />
       </div>
 
-      <div
-        v-if="customizeLoginBackground"
-        class="row mb-20"
-      >
+      <div v-if="customizeLoginBackground" class="row mb-20">
         <div class="col preview-container login-background span-6">
           <div class="mb-10">
             <FileImageSelector
@@ -440,12 +483,18 @@ export default {
             v-if="uiLoginBackgroundLight || uiLoginBackgroundDark"
             class="theme-light mb-10"
           >
-            <label class="text-muted">{{ t('branding.loginBackground.lightPreview') }}</label>
+            <label class="text-muted">{{
+              t("branding.loginBackground.lightPreview")
+            }}</label>
             <img
               class="img-preview"
               data-testid="branding-login-background-light-preview"
-              :src="uiLoginBackgroundLight ? uiLoginBackgroundLight : uiLoginBackgroundDark"
-            >
+              :src="
+                uiLoginBackgroundLight
+                  ? uiLoginBackgroundLight
+                  : uiLoginBackgroundDark
+              "
+            />
           </SimpleBox>
         </div>
         <div class="col preview-container login-background span-6">
@@ -463,23 +512,29 @@ export default {
           </div>
           <SimpleBox
             v-if="uiLoginBackgroundDark || uiLoginBackgroundLight"
-            class="theme-dark  mb-10"
+            class="theme-dark mb-10"
           >
-            <label class="text-muted">{{ t('branding.loginBackground.darkPreview') }}</label>
+            <label class="text-muted">{{
+              t("branding.loginBackground.darkPreview")
+            }}</label>
             <img
               class="img-preview"
               data-testid="branding-login-background-dark-preview"
-              :src="uiLoginBackgroundDark ? uiLoginBackgroundDark : uiLoginBackgroundLight"
-            >
+              :src="
+                uiLoginBackgroundDark
+                  ? uiLoginBackgroundDark
+                  : uiLoginBackgroundLight
+              "
+            />
           </SimpleBox>
         </div>
       </div>
 
       <h3 class="mt-20 mb-5 pb-5">
-        {{ t('branding.favicon.label') }}
+        {{ t("branding.favicon.label") }}
       </h3>
       <label class="text-label">
-        {{ t('branding.favicon.tip', {}, true) }}
+        {{ t("branding.favicon.tip", {}, true) }}
       </label>
 
       <div class="row mt-10 mb-20">
@@ -490,10 +545,7 @@ export default {
         />
       </div>
 
-      <div
-        v-if="customizeFavicon"
-        class="row mb-20"
-      >
+      <div v-if="customizeFavicon" class="row mb-20">
         <div class="col favicon-container span-12">
           <div class="mb-10">
             <FileImageSelector
@@ -508,21 +560,23 @@ export default {
             />
           </div>
           <SimpleBox v-if="uiFavicon">
-            <label class="text-muted">{{ t('branding.favicon.preview') }}</label>
+            <label class="text-muted">{{
+              t("branding.favicon.preview")
+            }}</label>
             <img
               class="favicon-preview"
               data-testid="branding-favicon-preview"
               :src="uiFavicon"
-            >
+            />
           </SimpleBox>
         </div>
       </div>
 
       <h3 class="mt-40 mb-5 pb-0">
-        {{ t('branding.color.label') }}
+        {{ t("branding.color.label") }}
       </h3>
       <label class="text-label">
-        {{ t('branding.color.tip', {}, true) }}
+        {{ t("branding.color.tip", {}, true) }}
       </label>
       <div class="row mt-20">
         <Checkbox
@@ -531,21 +585,15 @@ export default {
           :mode="mode"
         />
       </div>
-      <div
-        v-if="customizeColor"
-        class="row mt-20 mb-20"
-      >
-        <ColorInput
-          v-model="uiColor"
-          component-testid="primary"
-        />
+      <div v-if="customizeColor" class="row mt-20 mb-20">
+        <ColorInput v-model="uiColor" component-testid="primary" />
       </div>
 
       <h3 class="mt-40 mb-5 pb-0">
-        {{ t('branding.linkColor.label') }}
+        {{ t("branding.linkColor.label") }}
       </h3>
       <label class="text-label">
-        {{ t('branding.linkColor.tip', {}, true) }}
+        {{ t("branding.linkColor.tip", {}, true) }}
       </label>
       <div class="row mt-20">
         <Checkbox
@@ -554,28 +602,17 @@ export default {
           :mode="mode"
         />
       </div>
-      <div
-        v-if="customizeLinkColor"
-        class="row mt-20 mb-20"
-      >
-        <ColorInput
-          v-model="uiLinkColor"
-          class="col"
-          component-testid="link"
-        />
+      <div v-if="customizeLinkColor" class="row mt-20 mb-20">
+        <ColorInput v-model="uiLinkColor" class="col" component-testid="link" />
         <span class="col link-example">
           <a>
-            {{ t('branding.linkColor.example') }}
+            {{ t("branding.linkColor.example") }}
           </a>
         </span>
       </div>
     </div>
     <template v-for="err in errors">
-      <Banner
-        :key="err"
-        color="error"
-        :label="err"
-      />
+      <Banner :key="err" color="error" :label="err" />
     </template>
     <div v-if="mode === 'edit'">
       <AsyncButton
@@ -588,7 +625,7 @@ export default {
   </div>
 </template>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .link-example {
   display: flex;
   align-content: center;
