@@ -14,12 +14,15 @@ server {
 
     access_log  /var/log/nginx/host.access.log  main;
 
-    location ~ ^/k8s/|/pp/|/api/|/apis/|/v1/|/v3/|/v3-public/|/api-ui|/meta/|/rancherversion {
-        proxy_pass https://api;
+    location ~ ^/k8s/|/pp/|/api/|/apis/|/v1/|/v3/|/v3-public/|/api-ui|/meta/|/rancherversion|/healthz {
+        proxy_pass https://api/$request_uri;
+        # proxy_pass https://rancher.18.236.138.233.sslip.io/$request_uri;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+
+        add_header x-response-header 'this-is-a-test';
     }
 
     location ~* ^/v1- {
