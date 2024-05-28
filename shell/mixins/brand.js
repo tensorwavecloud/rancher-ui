@@ -193,7 +193,7 @@ export default {
     setBodyClass() {
       const body = document.getElementsByTagName('body')[0];
       const cssClass = `overflow-hidden dashboard-body`;
-      let bodyClass = `theme-${ this.theme } ${ cssClass }`;
+      let bodyClass = `theme-dark ${ cssClass }`;
 
       if ( this.brand ) {
         try {
