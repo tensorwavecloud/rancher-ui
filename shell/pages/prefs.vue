@@ -193,7 +193,7 @@ export default {
       </div>
     </div>
     <!-- Theme -->
-    <div class="mt-10 mb-10">
+    <!-- <div class="mt-10 mb-10">
       <hr>
       <h4 v-t="'prefs.theme.label'" />
       <ButtonGroup
@@ -208,7 +208,7 @@ export default {
           :am="am"
         />
       </div>
-    </div>
+    </div> -->
     <!-- Login landing page -->
     <div
       v-if="!isSingleProduct"
@@ -290,13 +290,13 @@ export default {
         class="mt-20"
       />
       <br>
-      <Checkbox
+      <!-- <Checkbox
         v-model="themeShortcut"
         data-testid="prefs__themeShortcut"
         :label="t('prefs.advFeatures.themeShortcut', {}, true)"
         class="mt-20"
       />
-      <br>
+      <br> -->
       <Checkbox
         v-if="!isSingleProduct"
         v-model="hideDescriptions"
