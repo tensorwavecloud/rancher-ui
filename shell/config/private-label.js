@@ -66,7 +66,7 @@ export function getVendor() {
     return STANDARD_VENDOR;
   }
 
-  return vendor;
+  return 'TensorWave';
 }
 
 export function getProduct() {
