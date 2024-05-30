@@ -27,6 +27,9 @@ COPY vue-shim.d.ts vue.config.js ./
 # Install the dependencies
 RUN yarn install
 
+ENV ROUTER_BASE="/dashboard/" \
+    RESOURCE_BASE="/dashboard/"
+
 # Build the Rancher UI
 # Make sure we use the proper SSL provider
 RUN NODE_OPTIONS="--openssl-legacy-provider --max_old_space_size=4096" \
@@ -38,3 +41,6 @@ WORKDIR /var/lib/rancher
 
 RUN rm -rf /usr/share/rancher-ui/ui-dashboard/dashboard*
 COPY --from=build-stage /rancher-ui/dist /usr/share/rancher/ui-dashboard/dashboard
+
+ENV CATTLE_UI_OFFLINE_PREFERRED=true \
+    CATTLE_UI_DASHBOARD_INDEX="https://localhost/dashboard/index.html
