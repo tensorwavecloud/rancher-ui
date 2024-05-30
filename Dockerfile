@@ -43,4 +43,4 @@ RUN rm -rf /usr/share/rancher-ui/ui-dashboard/dashboard*
 COPY --from=build-stage /rancher-ui/dist /usr/share/rancher/ui-dashboard/dashboard
 
 ENV CATTLE_UI_OFFLINE_PREFERRED=true \
-    CATTLE_UI_DASHBOARD_INDEX="https://localhost/dashboard/index.html
+    CATTLE_UI_DASHBOARD_INDEX="https://localhost/dashboard/index.html"
